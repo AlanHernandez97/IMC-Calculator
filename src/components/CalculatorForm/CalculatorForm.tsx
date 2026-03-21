@@ -29,11 +29,11 @@ const CalculatorForm = ({peso, altura, setBMI, setWeight, setHeight}: ICalculato
 
     return (
         <form onSubmit={handleSubmit} className='flex flex-col gap-5'>
-            <div>
+            <div className='w-full flex gap-3'>
                 <Input onChange={handleChange} label="Peso" name="peso" type="number" fullWidth value={peso}/>
                 <Input onChange={handleChange} label="Altura" name="altura" type="number" fullWidth value={altura}/>
             </div>
-            <button type='submit' className='w-40 cursor-pointer border border-gray-300 bg-emerald-500 text-white p-3 rounded-2xl'>Calcular IMC</button>
+            <button type='submit' className='md:w-40 w-full cursor-pointer border border-gray-300 bg-emerald-500 text-white p-3 rounded-2xl'>Calcular IMC</button>
         </form>
     )
 }
