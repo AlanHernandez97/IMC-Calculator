@@ -15,7 +15,7 @@ const BMI = () => {
             <TabsContainer title={['Calculadora', 'Historial']}>
                 <div className='flex flex-col gap-6 justify-center items-center'>
                     <div className='w-full md:w-3/4 flex flex-col gap-3 items-center justify-center border border-gray-300 rounded-md p-5 flex-wrap'>
-                        <h1 className='text-3xl font-bold'>Tu salud es primero</h1>
+                        <h1 className='text-3xl font-bold text-center'>Tu salud es primero</h1>
                         <span className='text-lg text-center'>Ingresa tus datos corporales para comenzar el análisis</span>
                         <div className='w-full md:w-1/2 flex flex-col gap-5 items-center justify-center'>
                             <CalculatorForm altura={height} peso={weight} BIM={BIM} setBMI={setBIM} setWeight={setWeight} setHeight={setHeight}/>
