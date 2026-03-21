@@ -5,7 +5,7 @@ const BMITable = () => {
     <div className="w-full md:w-3/4 bg-white rounded-md p-5 border border-gray-300">
         <div className="flex items-center gap-2 mb-4 md:justify-center justify-start">
             <div className="w-8 h-8 bg-emerald-100 rounded-full flex items-center justify-center text-center">
-                <Info className="text-emerald-500"/>
+                <Info className="text-emerald-500" size={18}/>
             </div>
             <h2 className="text-2xl font-bold">Tabla de referencia</h2>
         </div>
