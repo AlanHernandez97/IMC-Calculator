@@ -3,6 +3,7 @@ import TabsContainer from './components/TabsContainer/TabsContainer'
 import CalculatorForm from './components/CalculatorForm/CalculatorForm'
 import { useState } from 'react';
 import BMIResults from './components/BMIResults/BMIResults';
+import BMITable from './components/BMITable/BMITable';
 
 
 const BMI = () => {
@@ -24,7 +25,10 @@ const BMI = () => {
 
                     {
                     BIM > 0 && (
-                        <BMIResults bmi={BIM}/>
+                       <div className='w-full items-center justify-center flex flex-col gap-4'>
+                         <BMIResults bmi={BIM}/>
+                         <BMITable />
+                       </div>
                     )
                     }
                 </div>
