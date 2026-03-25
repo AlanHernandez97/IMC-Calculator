@@ -1,3 +1,4 @@
+import type { IBMI } from '../../Types/BMI';
 import { CalculateBMI } from '../../Utils';
 import Input from '../UI/Input';
 
@@ -8,14 +9,16 @@ interface ICalculatorForm {
     setBMI: React.Dispatch<React.SetStateAction<number>>
     setWeight: React.Dispatch<React.SetStateAction<number>>
     setHeight: React.Dispatch<React.SetStateAction<number>>
+    handleCreateBMI: (bmi: IBMI) => void
 }
 
-const CalculatorForm = ({peso, altura, setBMI, setWeight, setHeight}: ICalculatorForm) => {
+const CalculatorForm = ({peso, altura, setBMI, setWeight, setHeight, handleCreateBMI}: ICalculatorForm) => {
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const result = CalculateBMI(peso,altura)
-        setBMI(result)
+        setBMI(result);
+        handleCreateBMI({id: 0, bmi: result})   
     }
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
