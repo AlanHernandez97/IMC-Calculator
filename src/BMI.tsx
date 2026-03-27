@@ -16,7 +16,7 @@ const BMI = () => {
 
     const handleCreateBMI = (bmi: IBMI) => {
         const newBMIEntry: IBMI = {
-            id: bmi.id + 1,
+            id: bmi.id + Math.floor(Math.random() * 1000),
             bmi: bmi.bmi
         }
         setNewBMI([...newBMI, newBMIEntry])
@@ -47,7 +47,7 @@ const BMI = () => {
                     }
                 </div>
                 <div className='w-full md:w-3/4 md:py-5 mx-auto'>
-                    <BMIHistory bmiHistory={newBMI} weight={weight} height={height}/>
+                    <BMIHistory bmiHistory={newBMI} weight={weight} height={height} setNewBMI={setNewBMI}/>
                 </div>
                
             </TabsContainer>

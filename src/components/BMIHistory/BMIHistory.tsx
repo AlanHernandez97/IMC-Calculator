@@ -6,9 +6,15 @@ interface IBMIHistoryProps {
     bmiHistory: IBMI[];
     height?: number;
     weight?: number;
+    setNewBMI?: React.Dispatch<React.SetStateAction<IBMI[]>>;
 }
 
-const BMIHistory = ({ bmiHistory, height, weight }: IBMIHistoryProps) => {
+const BMIHistory = ({ bmiHistory, height, weight, setNewBMI }: IBMIHistoryProps) => {
+
+    const handleDeleteBMI = (id:number)=>{
+        const updatedHistory = bmiHistory.filter(bmi => bmi.id !== id);
+        setNewBMI?.(updatedHistory);
+    }
 
     const getBMICategory = (bmi: IBMI) => {
         if (bmi.bmi < 18.5) {
@@ -28,7 +34,7 @@ const BMIHistory = ({ bmiHistory, height, weight }: IBMIHistoryProps) => {
                     </div>
                     <div className="w-1/3 flex flex-col justify-center items-end">
                         <p className="font-bold text-xl">IMC: {bmi.bmi.toFixed(1)}</p>
-                        <div className="hover:bg-red-100 hover:text-red-500 h-8 w-8 rounded-full flex items-center justify-center cursor-pointer">
+                        <div onClick={() => handleDeleteBMI(bmi.id)} className="hover:bg-red-100 hover:text-red-500 h-8 w-8 rounded-full flex items-center justify-center cursor-pointer">
                             <Trash2 />
                         </div>
                     </div>
@@ -51,7 +57,7 @@ const BMIHistory = ({ bmiHistory, height, weight }: IBMIHistoryProps) => {
                     </div>
                     <div className="w-1/3 flex flex-col justify-center items-end">
                         <p className="font-bold text-xl">IMC: {bmi.bmi.toFixed(1)}</p>
-                        <div className="hover:bg-red-100 hover:text-red-500 h-8 w-8 rounded-full flex items-center justify-center cursor-pointer">
+                        <div onClick={() => handleDeleteBMI(bmi.id)} className="hover:bg-red-100 hover:text-red-500 h-8 w-8 rounded-full flex items-center justify-center cursor-pointer">
                             <Trash2 />
                         </div>
                     </div>
@@ -74,7 +80,7 @@ const BMIHistory = ({ bmiHistory, height, weight }: IBMIHistoryProps) => {
                     </div>
                     <div className="w-1/3 flex flex-col justify-center items-end">
                         <p className="font-bold text-xl">IMC: {bmi.bmi.toFixed(1)}</p>
-                        <div className="hover:bg-red-100 hover:text-red-500 h-8 w-8 rounded-full flex items-center justify-center cursor-pointer">
+                        <div onClick={() => handleDeleteBMI(bmi.id)} className="hover:bg-red-100 hover:text-red-500 h-8 w-8 rounded-full flex items-center justify-center cursor-pointer">
                             <Trash2 />
                         </div>
                     </div>
@@ -97,7 +103,7 @@ const BMIHistory = ({ bmiHistory, height, weight }: IBMIHistoryProps) => {
                     </div>
                     <div className="w-1/3 flex flex-col justify-center items-end">
                         <p className="font-bold text-xl">IMC: {bmi.bmi.toFixed(1)}</p>
-                        <div className="hover:bg-red-100 hover:text-red-500 h-8 w-8 rounded-full flex items-center justify-center cursor-pointer">
+                        <div onClick={() => handleDeleteBMI(bmi.id)} className="hover:bg-red-100 hover:text-red-500 h-8 w-8 rounded-full flex items-center justify-center cursor-pointer">
                             <Trash2 />
                         </div>
                     </div>
@@ -106,14 +112,22 @@ const BMIHistory = ({ bmiHistory, height, weight }: IBMIHistoryProps) => {
         }
     }
 
+    const handleDeleteAll = () =>{
+        setNewBMI?.([])
+    }
+
   return (
     <div className='w-full flex flex-col gap-5 flex-wrap items-center'>
         <div className='w-full flex items-center justify-between mb-5 md:p-5 p-2.5'>
             <h2 className='text-2xl font-bold'>Historial</h2>
-            <button className=' text-red-500 px-4 py-2 rounded bg-transparent hover:bg-red-100 hover:border-red-500 hover:rounded-xl'>Borrar todo</button>
+           {
+            bmiHistory.length > 0 && (
+                 <button onClick={handleDeleteAll} className=' text-red-500 px-4 py-2 rounded bg-transparent hover:bg-red-100 hover:border-red-500 hover:rounded-xl'>Borrar todo</button>
+            )
+           }
         </div>
         <div className="w-full flex flex-wrap gap-4 justify-start items-center">
-            {bmiHistory ?  bmiHistory.map((bmi) => (
+            {bmiHistory.length > 0 ?  bmiHistory.map((bmi) => (
                 <div key={bmi.id} className="w-full items-center justify-center flex gap-2 md:w-1/4 bg-white rounded-md p-2 border border-gray-300">
                     {
                         getBMICategory(bmi)
