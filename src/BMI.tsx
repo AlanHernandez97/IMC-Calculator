@@ -1,7 +1,7 @@
 
 import TabsContainer from './components/TabsContainer/TabsContainer'
 import CalculatorForm from './components/CalculatorForm/CalculatorForm'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import BMIResults from './components/BMIResults/BMIResults';
 import BMITable from './components/BMITable/BMITable';
 import BMIHistory from './components/BMIHistory/BMIHistory';
@@ -13,6 +13,7 @@ const BMI = () => {
     const [height, setHeight] = useState(0)
     const [BIM, setBIM] = useState(0);
     const [newBMI, setNewBMI] = useState<IBMI[]>([])
+    const [isLoaded, setIsLoaded] = useState(false);
 
     const handleCreateBMI = (bmi: IBMI) => {
         const newBMIEntry: IBMI = {
@@ -21,6 +22,25 @@ const BMI = () => {
         }
         setNewBMI([...newBMI, newBMIEntry])
     }
+
+      useEffect(() => {
+        const data = localStorage.getItem("newBMI");
+        if (data) {
+            try {
+            setNewBMI(JSON.parse(data));
+            } catch {
+            setNewBMI([]);
+            }
+        }
+        setIsLoaded(true);
+    }, []);
+
+   useEffect(() => {
+        if (!isLoaded) return;
+
+        localStorage.setItem("newBMI", JSON.stringify(newBMI));
+    }, [newBMI, isLoaded]);
+    
 
     console.log('BMI:', newBMI)
 
